@@ -2,10 +2,19 @@ import { useEffect, useState } from "react";
 import styles from "./MainContent.module.css";
 import Product from "../Product/Product";
 import MultiActionAreaCard from "../MultiActionAreaCard";
+import Cart from "../Cart/Cart";
 
 export default function MainContent() {
   const [products, setProducts] = useState([]);
 
+  function handleClick(id) {
+    const updatedProducts = products.map((prod) => {
+      if (prod.id == id) {
+        return { ...prod, selected: true };
+      } else return prod;
+    });
+    setProducts(updatedProducts);
+  }
   useEffect(() => {
     const fetchProducts = async () => {
       try {
@@ -29,16 +38,18 @@ export default function MainContent() {
         <div className={styles.gridContainer}>
           {products.length > 0 &&
             products.map((product) => {
-              return (
-                <MultiActionAreaCard
-                  product={product}
-                  key={product.id}></MultiActionAreaCard>
-              );
+              if (!("selected" in product))
+                return (
+                  <MultiActionAreaCard
+                    handleClick={handleClick}
+                    product={product}
+                    key={product.id}></MultiActionAreaCard>
+                );
             })}
         </div>
         <div className={styles.cart}>
-          <h1>hello to the cart</h1>
-          <div className={styles.cartItems}></div>
+          <h1 style={{ color: "white" }}>CART</h1>
+          <Cart cartItems={products}></Cart>
         </div>
       </div>
     </>

@@ -1,0 +1,20 @@
+.cart {
+  list-style-type: none;
+  padding: 5px;
+  margin: 5px auto;
+  position: fixed;
+}
+
+.cartItem {
+  background-color: #f8f8f8;
+  border: 1px solid #ddd;
+  color: black;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 5px 0;
+  transition: background-color 0.3s;
+}
+
+.cartItem:hover {
+  background-color: #e0e0e0;
+}
