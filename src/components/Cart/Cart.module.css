@@ -7,9 +7,28 @@
   border-radius: 10px;
   border: #d2d2d2d2 solid 1px;
   width: fit-content;
-  margin-right: 6%;
+  margin-right: 5%;
+  overflow: scroll;
+  max-height: 50%;
+  margin-top: 60px;
+  overflow-x: hidden;
 }
+.details {
+  display: flex;
+  justify-content: start;
+  gap: 5%;
 
+  width: 340px;
+  button {
+    display: inline;
+    width: fit-content;
+  }
+  h4 {
+    width: fit-content;
+    display: inline;
+    background-color: #5ac1ff;
+  }
+}
 .cartItem {
   background-color: #f8f8f8;
   border: 1px solid #ddd;
