@@ -1,8 +1,14 @@
 .cart {
   list-style-type: none;
   padding: 5px;
-  margin: 5px auto;
+  margin: 2px auto;
   position: fixed;
+  min-width: 320px;
+  border-radius: 10px;
+  border: #d2d2d2d2 solid 1px;
+  min-height: 50%;
+  width: fit-content;
+  margin-right: 6%;
 }
 
 .cartItem {
@@ -13,8 +19,9 @@
   padding: 10px;
   margin: 5px 0;
   transition: background-color 0.3s;
+  cursor: pointer;
 }
 
 .cartItem:hover {
-  background-color: #e0e0e0;
+  background-color: #aa0b0bd2;
 }

@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import styles from "./MainContent.module.css";
-import Product from "../Product/Product";
 import MultiActionAreaCard from "../MultiActionAreaCard";
 import Cart from "../Cart/Cart";
 
@@ -11,6 +10,21 @@ export default function MainContent() {
     const updatedProducts = products.map((prod) => {
       if (prod.id == id) {
         return { ...prod, selected: true };
+      } else return prod;
+    });
+    setProducts(updatedProducts);
+  }
+
+  function handleDelete(id) {
+    const isDeleteConfirmed = window.confirm(
+      "Are you sure to delete from car?"
+    );
+    if (!isDeleteConfirmed) {
+      return;
+    }
+    const updatedProducts = products.map((prod) => {
+      if (prod.id == id) {
+        return { ...prod, selected: false };
       } else return prod;
     });
     setProducts(updatedProducts);
@@ -29,8 +43,6 @@ export default function MainContent() {
     fetchProducts();
   }, []);
 
-  console.log(products);
-
   return (
     <>
       <h1 style={{ color: "white" }}>Oline Product market</h1>
@@ -38,7 +50,7 @@ export default function MainContent() {
         <div className={styles.gridContainer}>
           {products.length > 0 &&
             products.map((product) => {
-              if (!("selected" in product))
+              if (!("selected" in product) || !product.selected)
                 return (
                   <MultiActionAreaCard
                     handleClick={handleClick}
@@ -48,8 +60,8 @@ export default function MainContent() {
             })}
         </div>
         <div className={styles.cart}>
-          <h1 style={{ color: "white" }}>CART</h1>
-          <Cart cartItems={products}></Cart>
+          <h1 style={{ color: "white", padding: "0", margin: "0" }}>CART</h1>
+          <Cart cartItems={products} handleDelete={handleDelete}></Cart>
         </div>
       </div>
     </>
