@@ -1,7 +1,7 @@
 import { useState } from "react";
 import styles from "./Cart.module.css";
 import Form from "../Form/Form";
-
+import LocalMallOutlinedIcon from "@mui/icons-material/LocalMallOutlined";
 export default function Cart({ cartItems, handleDelete }) {
   let totalPrice = 0;
   const [showForm, setShowForm] = useState(false);
@@ -49,7 +49,12 @@ export default function Cart({ cartItems, handleDelete }) {
         </h4>
         {totalPrice != 0 && (
           <button className={styles.cartItem} onClick={handleGetClick}>
-            <strong>get Products</strong>
+            {/* <strong>get Products</strong> */}
+            <LocalMallOutlinedIcon
+              style={{
+                fontSize: "1.5rem",
+                lineHeight: "1",
+              }}></LocalMallOutlinedIcon>
           </button>
         )}
       </div>

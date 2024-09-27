@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 import styles from "./MainContent.module.css";
 import MultiActionAreaCard from "../MultiActionAreaCard";
 import Cart from "../Cart/Cart";
-
+import AddShoppingCartOutlinedIcon from "@mui/icons-material/AddShoppingCartOutlined";
+import CheckroomOutlinedIcon from "@mui/icons-material/CheckroomOutlined";
 export default function MainContent() {
   const [products, setProducts] = useState([]);
 
@@ -45,7 +46,14 @@ export default function MainContent() {
 
   return (
     <>
-      <h1 style={{ color: "white" }}>Oline Product market</h1>
+      <h1 style={{ color: "white" }}>
+        {" "}
+        Oline Product market
+        <strong>
+          <CheckroomOutlinedIcon
+            style={{ fontSize: "2rem" }}></CheckroomOutlinedIcon>
+        </strong>
+      </h1>
       <div className={styles.mainContainer}>
         <div className={styles.gridContainer}>
           {products.length > 0 &&
@@ -60,7 +68,9 @@ export default function MainContent() {
             })}
         </div>
         <div className={styles.cart}>
-          <h1 style={{ color: "white", padding: "0", margin: "0" }}>CART</h1>
+          <h1 style={{ color: "white", padding: "0", margin: "0" }}>
+            <AddShoppingCartOutlinedIcon></AddShoppingCartOutlinedIcon>CART
+          </h1>
           <Cart cartItems={products} handleDelete={handleDelete}></Cart>
         </div>
       </div>
