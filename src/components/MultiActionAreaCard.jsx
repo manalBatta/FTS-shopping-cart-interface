@@ -48,7 +48,7 @@ export default function MultiActionAreaCard({ product, handleClick }) {
           size="small"
           color="primary"
           variant="contained"
-          onClick={() => handleClick(product.id)}>
+          onClick={() => handleClick(product.id, true)}>
           Add to Cart
         </Button>
         <IconButton aria-label="details" color="primary">

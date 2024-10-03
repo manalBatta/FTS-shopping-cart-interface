@@ -5,31 +5,25 @@ import LocalMallOutlinedIcon from "@mui/icons-material/LocalMallOutlined";
 export default function Cart({ cartItems, handleDelete }) {
   let totalPrice = 0;
   const [showForm, setShowForm] = useState(false);
-  function handleGetClick() {
-    setShowForm(true);
-  }
-
-  //form handlers
-  const handleButtonClick = () => {
-    setShowForm(true); // Show the form when the button is clicked
-  };
-
-  const handleCloseForm = () => {
-    setShowForm(false); // Hide the form when canceled or submitted
-  };
 
   const handleSubmit = (event) => {
+    //can use validation library
     event.preventDefault();
-    // Handle form submission (e.g., collect input values)
-    console.log("Form submitted");
-    handleCloseForm();
+    setShowForm(false);
   };
+  const filteredCartItems = cartItems.filter((item) => {
+    if ("selected" in item && item.selected) {
+      totalPrice += item.price;
+      return true;
+    }
+    return false;
+  });
+
   return (
     <>
       <ul className={styles.cart}>
-        {cartItems.map((item) => {
-          if ("selected" in item && item.selected) {
-            totalPrice += item.price;
+        {filteredCartItems?.length &&
+          filteredCartItems.map((item) => {
             return (
               <li
                 className={styles.cartItem}
@@ -40,16 +34,14 @@ export default function Cart({ cartItems, handleDelete }) {
                 <strong>{item.price}$</strong>
               </li>
             );
-          }
-        })}
+          })}
       </ul>
       <div className={styles.details}>
         <h4 className={styles.cartItem}>
           Total Price = {Math.round(totalPrice)}$
         </h4>
         {totalPrice != 0 && (
-          <button className={styles.cartItem} onClick={handleGetClick}>
-            {/* <strong>get Products</strong> */}
+          <button className={styles.cartItem} onClick={() => setShowForm(true)}>
             <LocalMallOutlinedIcon
               style={{
                 fontSize: "1.5rem",
@@ -61,8 +53,8 @@ export default function Cart({ cartItems, handleDelete }) {
       {showForm && (
         <Form
           showForm={showForm}
-          handleButtonClick={handleButtonClick}
-          handleCloseForm={handleCloseForm}
+          handleButtonClick={() => setShowForm(true)}
+          handleCloseForm={() => setShowForm(false)}
           handleSubmit={handleSubmit}></Form>
       )}
     </>
