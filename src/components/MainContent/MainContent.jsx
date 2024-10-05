@@ -4,9 +4,12 @@ import MultiActionAreaCard from "../MultiActionAreaCard";
 import Cart from "../Cart/Cart";
 import AddShoppingCartOutlinedIcon from "@mui/icons-material/AddShoppingCartOutlined";
 import CheckroomOutlinedIcon from "@mui/icons-material/CheckroomOutlined";
+import Snackbar from "@mui/material/Snackbar";
+import Grid from "@mui/material/Grid2";
+
 export default function MainContent() {
   const [products, setProducts] = useState([]);
-
+  const [isError, setIsError] = useState(false);
   function updateProducts(id, select) {
     setProducts((prev) =>
       prev.map((prod) => {
@@ -32,10 +35,10 @@ export default function MainContent() {
       try {
         const res = await fetch("https://fakestoreapi.com/products");
         if (!res.ok) {
-          //TO DO:use the material notes
-          alert("something broke try again later");
+          setIsError(true);
           throw new Error("error in api");
         }
+        setIsError(false);
         const json = await res.json();
         setProducts(json);
       } catch (error) {
@@ -51,6 +54,13 @@ export default function MainContent() {
 
   return (
     <>
+      <Snackbar
+        anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
+        open={isError}
+        message="sorry Error fetching Products Try again later"
+        key={"123"}
+      />
+
       <h1 style={{ color: "white" }}>
         Oline Product market
         <strong>
@@ -59,17 +69,23 @@ export default function MainContent() {
         </strong>
       </h1>
       <div className={styles.mainContainer}>
-        <div className={styles.gridContainer}>
+        <Grid
+          container
+          spacing={2}
+          justifyContent="center"
+          alignItems="stretch">
           {products?.length > 0 &&
             notSelectedProducts.map((product) => {
               return (
-                <MultiActionAreaCard
-                  handleClick={updateProducts}
-                  product={product}
-                  key={product.id}></MultiActionAreaCard>
+                <Grid size={4}>
+                  <MultiActionAreaCard
+                    handleClick={updateProducts}
+                    product={product}
+                    key={product.id}></MultiActionAreaCard>
+                </Grid>
               );
             })}
-        </div>
+        </Grid>
         <div className={styles.cart}>
           <h1 style={{ color: "white", padding: "0", margin: "0" }}>
             <AddShoppingCartOutlinedIcon></AddShoppingCartOutlinedIcon>CART

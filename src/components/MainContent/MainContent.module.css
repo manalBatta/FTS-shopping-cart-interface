@@ -3,14 +3,7 @@
   flex-direction: row;
   color: white;
   margin-left: 10px;
-  .gridContainer {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    grid-auto-rows: min-content;
-    gap: 15px;
-    align-items: stretch;
-    flex-grow: 3;
-  }
+
   .cart {
     min-width: 20vw;
     padding: 0 10px;
